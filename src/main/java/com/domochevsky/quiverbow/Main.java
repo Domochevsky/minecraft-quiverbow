@@ -47,12 +47,12 @@ public class Main
 	protected Configuration config;										// Accessible from other files this way
 	
 	// TODO: Overhaul all of this to use arraylist.
-	private static ArrayList<_WeaponBase> weapons = new ArrayList<_WeaponBase>();	// Holder array for all (fully set up) possible weapons
-	private static ArrayList<_AmmoBase> ammo = new ArrayList<_AmmoBase>();			// Same with ammo, since they got recipes as well
+	public static ArrayList<_WeaponBase> weapons = new ArrayList<_WeaponBase>();	// Holder array for all (fully set up) possible weapons
+	public static ArrayList<_AmmoBase> ammo = new ArrayList<_AmmoBase>();			// Same with ammo, since they got recipes as well
 	//private static String[] weaponType = new String[60];		// For Battle Gear 2
 	
 	@SideOnly(Side.CLIENT)
-	private static ArrayList<ModelBase> models;	// Client side only
+	public static ArrayList<ModelBase> models;	// Client side only
 	
 	public static Block fenLight = null;
 	
@@ -299,18 +299,17 @@ public class Main
 	
 	private void addAmmo(_AmmoBase ammoBase, String name)
 	{
-		this.ammo.add(ammoBase);
+		Main.ammo.add(ammoBase);
 		
 		GameRegistry.registerItem(ammoBase, "ammochevsky_" + name); // And register it
 	}
 	
-	
 	// Helper function for taking care of weapon registration
-	private void addWeapon(_WeaponBase weapon, ModelBase model, String weaponName, boolean isClient)
+	private void addWeapon(_WeaponBase weapon, ModelBase model, String weaponName, boolean isClient, String handedness)
 	{
-		if (this.weapons == null) { this.weapons = new ArrayList<_WeaponBase>(); }
+		if (Main.weapons == null) { Main.weapons = new ArrayList<_WeaponBase>(); }
 		
-		this.weapons.add(weapon);
+		Main.weapons.add(weapon);
 		
 		GameRegistry.registerItem(weapon, "weaponchevsky_" + weaponName);	// And register it
 		
@@ -318,11 +317,10 @@ public class Main
 		
 		if (isClient && useModels && model != null)	// Do we care about models? And if we do, do we got a custom weapon model? :O
 		{
-			if (this.models == null) { this.models = new ArrayList<ModelBase>(); }	// Init
+			if (Main.models == null) { Main.models = new ArrayList<ModelBase>(); }	// Init
 			
-			this.models.add(model);
-			models[counter] = model;								// Keeping track of it
-			proxy.registerWeaponRenderer(weapon, (byte) counter);	// And registering its renderer
+			Main.models.add(model);								// Keeping track of it
+			proxy.registerWeaponRenderer(weapon, (byte) Main.models.indexOf(model));	// And registering its renderer
 		}
 	}
 	
@@ -340,24 +338,17 @@ public class Main
 	// Adding props and recipes for all registered weapons now
 	private static void addAllProps(FMLPreInitializationEvent event, Configuration config)
 	{
-		int counter = 0;
-		
-		while (counter < ammo.length && ammo[counter] != null)	// Ammo first
+		// Ammo first
+		for(_AmmoBase ammunition : ammo)
 		{
-			ammo[counter].addRecipes();
-			counter += 1;
+		    ammunition.addRecipes();
 		}
 		
-		// Then parts
-		
-		counter = 0;
-		
-		while (counter < weapons.length && weapons[counter] != null)	// Weapons last
+		// Weapons last
+		for(_WeaponBase weapon : weapons)
 		{
-			weapons[counter].addProps(event, config);
-			weapons[counter].addRecipes();
-			
-			counter += 1;
+		    weapon.addProps(event, config);
+		    weapon.addRecipes();
 		}
 	}
 	
@@ -367,17 +358,5 @@ public class Main
 		//Where hand is a case-insensitive String ("both" -or- "dual" for one-handed items,  "right" -or- "mainhand" -or- "left" -or- "offhand" for two-handed on designated side)
 		//Where itemStack is an ItemStack instance specific enough of the item
 		FMLInterModComms.sendMessage("battlegear2", wield, new ItemStack(item));
-	}
-
-
-	public static _WeaponBase getRandomWeaponForQuiverMob()
-	{
-		// TODO
-	}
-	
-	
-	public static _WeaponBase getWeaponByUniqueName(String uniqueName)
-	{
-		// TODO
 	}
 }

@@ -20,23 +20,24 @@ import cpw.mods.fml.relauncher.SideOnly;
 @cpw.mods.fml.common.Optional.Interface(modid = "battlegear2", iface = "mods.battlegear2.api.IUsableItem", striprefs = true)
 public class _WeaponBase extends Item //implements mods.battlegear2.api.IUsableItem
 {
-	private String uniqueName = "WEAPON BASE";				// To be identified by
-	private String namePublic = "QuiverBow Weapon Base";	// Default values
-	private boolean Enabled;
+    	public String uniqueName = "WEAPON BASE";				// To be identified by
+	public String namePublic = "QuiverBow Weapon Base";	// Default values
+	public boolean Enabled;
 
 	//private int weaponID;
 
-	private int DmgMin;
-	private int DmgMax;
+	public int DmgMin;
+	public int DmgMax;
 	
+	public double Speed;
 	private double firingSpeed;
 
-	private int Knockback;
-	private byte Kickback;
+	public int Knockback;
+	public byte Kickback;
 
-	private int Cooldown;
+	public int Cooldown;
 
-	private boolean isMobUsable;	// Default
+	public boolean isMobUsable;	// Default
 
 	// Icons
 	@SideOnly(Side.CLIENT)

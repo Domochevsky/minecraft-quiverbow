@@ -48,9 +48,9 @@ public class AI_RandomEquip
     	
     	while (weapon == null)	// Until we hit a valid weapon
     	{
-    		randNum = rand.nextInt(Main.weapons.length);	// Grabbing a number between the list's length and its starting point
+    		randNum = rand.nextInt(Main.weapons.size());	// Grabbing a number between the list's length and its starting point
     		
-    		weapon = Main.weapons[randNum];
+    		weapon = Main.weapons.get(randNum);
     		
     		if (weapon != null && !weapon.isMobUsable()) { weapon = null; }	// Cannot be used by mobs, so begone
     		else if (weapon != null && !weapon.Enabled) { weapon = null; }	// Is disabled, so begone
@@ -73,9 +73,9 @@ public class AI_RandomEquip
     	
     	while (weapon == null)	// Until we hit a valid weapon
     	{
-    		randNum = rand.nextInt(Main.weapons.length);	// Grabbing a number between the list's length and its starting point
+    		randNum = rand.nextInt(Main.weapons.size());	// Grabbing a number between the list's length and its starting point
     		
-    		weapon = Main.weapons[randNum];
+    		weapon = Main.weapons.get(randNum);
     		
     		if (weapon != null && !weapon.isMobUsable()) { weapon = null; }	// Cannot be used by mobs, so begone
     		else if (weapon != null && !weapon.Enabled) { weapon = null; }	// Is disabled, so begone

@@ -140,55 +140,43 @@ public class Helper
 	}
 	
 	
-	private static Item getAmmoByClass(Class<? extends _AmmoBase> ammoBase)
+	private static Item getAmmoByClass(Class<? extends _AmmoBase>  targetClass)
 	{
-		int counter = 0;
-		
-		while (counter < Main.ammo.length && Main.ammo[counter] != null)
+		for(_AmmoBase ammunition : Main.ammo)
 		{
-			if (Main.ammo[counter].getClass() == ammoBase) { return Main.ammo[counter]; }	// Found it
-			
-			counter += 1;
+			if (ammunition.getClass() == targetClass) { return ammunition; }	// Found it
 		}
 		
 		return null;	// Don't have what you're looking for
 	}
 	
 	
-	public static ItemStack getAmmoStack(Class<? extends _AmmoBase> ammoBase, int dmg)
-	{
-		int counter = 0;
-		
-		while (counter < Main.ammo.length && Main.ammo[counter] != null)
+	public static ItemStack getAmmoStack(Class<? extends _AmmoBase> targetClass, int dmg)
+	{	
+		for(_AmmoBase ammunition : Main.ammo)
 		{
-			if (Main.ammo[counter].getClass() == ammoBase) { return new ItemStack(Main.ammo[counter], 1 , dmg); }
-			
-			counter += 1;
+		    if (ammunition.getClass() == targetClass) { return new ItemStack(ammunition, 1 , dmg); }
 		}
-		
+	
 		return null;	// No idea what you're looking for
 	}
 	
 	
-	public static ItemStack getWeaponStackByClass(Class<? extends _WeaponBase> weapon, boolean isEmpty)
+	public static ItemStack getWeaponStackByClass(Class<? extends _WeaponBase> targetClass, boolean isEmpty)
 	{
-		int counter = 0;
-		
-		while (counter < Main.weapons.length && Main.weapons[counter] != null)
+		for(_WeaponBase weapon : Main.weapons)
 		{
-			if (Main.weapons[counter].getClass() == weapon) // Found it
+			if (weapon.getClass() == targetClass) // Found it
 			{
 				if (isEmpty) // They want the empty version of this thing
 				{
-					return new ItemStack(Main.weapons[counter], 1, Main.weapons[counter].getMaxDamage());
+					return new ItemStack(weapon, 1, weapon.getMaxDamage());
 				}
 				else
 				{
-					return new ItemStack(Main.weapons[counter]);
+					return new ItemStack(weapon);
 				}
 			}
-			
-			counter += 1;
 		}
 		
 		return null;	// No idea what you want

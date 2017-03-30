@@ -624,13 +624,13 @@ public class Entity_AA extends EntityLiving
 		
 		if (this.hasFirstWeapon) 
 		{ 
-			tag.setInteger("firstWeapon", this.firstWeapon.weaponID); 
+			tag.setInteger("firstWeapon", Main.weapons.indexOf(this.firstWeapon)); 
 			tag.setInteger("firstAmmo", this.firstWeapon.getDamage(this.getHeldItem()));
 		}
 		
 		if (this.hasSecondWeapon) 
 		{ 
-			tag.setInteger("secondWeapon", this.secondWeapon.weaponID); 
+			tag.setInteger("secondWeapon", Main.weapons.indexOf(this.secondWeapon)); 
 			tag.setInteger("secondAmmo", this.secondWeapon.getDamage(this.getEquipmentInSlot(1)));
 		}
 		
@@ -692,8 +692,8 @@ public class Entity_AA extends EntityLiving
 		// Restoring the held weapon
 		if (this.hasFirstWeapon)
 		{
-			this.firstWeapon = Main.weapons[tag.getInteger("firstWeapon")];
-			AI_WeaponHandler.setFirstWeapon(this, new ItemStack(Main.weapons[tag.getInteger("firstWeapon")]));
+			this.firstWeapon = Main.weapons.get(tag.getInteger("firstWeapon"));
+			AI_WeaponHandler.setFirstWeapon(this, new ItemStack(Main.weapons.get(tag.getInteger("firstWeapon"))));
 			
 			if (this.getHeldItem() != null)
 			{
@@ -707,7 +707,7 @@ public class Entity_AA extends EntityLiving
 		
 		if (this.hasWeaponUpgrade && this.hasSecondWeapon)
 		{
-			AI_WeaponHandler.setSecondWeapon(this, new ItemStack(Main.weapons[tag.getInteger("secondWeapon")]));
+			AI_WeaponHandler.setSecondWeapon(this, new ItemStack(Main.weapons.get(tag.getInteger("secondWeapon"))));
 			
 			if (this.getHeldItem() != null)
 			{

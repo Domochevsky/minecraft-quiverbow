@@ -24,13 +24,13 @@ public class Render_Weapon implements IItemRenderer
     {
     	this.weaponID = weapon;	// the weapon ID
     	
-    	if (Main.models[weapon] == null) { this.dontRender = true; }	// Nothing to render
+    	if (Main.models.get(weapon) == null) { this.dontRender = true; }	// Nothing to render
     }
     
     
     void setTexture(ItemStack stack)
     {
-    	tex = new ResourceLocation("quiverchevsky:textures/items/models/" + Main.weapons[weaponID].getModelTexPath(stack) + ".png");
+    	tex = new ResourceLocation("quiverchevsky:textures/items/models/" + Main.weapons.get(weaponID).getModelTexPath(stack) + ".png");
     }
     
 	
@@ -70,14 +70,14 @@ public class Render_Weapon implements IItemRenderer
 		            //GL11.glTranslatef(0.65F, 0.55F, 0.0F);   	    // translate model to fit in the hand of the player (angled)
 		            GL11.glTranslatef(1.00F, -0.15F, 0.0F);   	// translate model to fit in the hand of the player, backup (straight holding)
 		            
-		            if (stack.getItemDamage() >= stack.getMaxDamage() && Main.models[weaponID] instanceof EnderNymous_Model)
+		            if (stack.getItemDamage() >= stack.getMaxDamage() && Main.models.get(weaponID) instanceof EnderNymous_Model)
 		            {
-		            	EnderNymous_Model nym = (EnderNymous_Model) Main.models[weaponID];
+		            	EnderNymous_Model nym = (EnderNymous_Model) Main.models.get(weaponID);
 		            	nym.renderEmpty((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);	// Trying something out here
 		            }
 		            else
 		            {
-		            	Main.models[weaponID].render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+		            	Main.models.get(weaponID).render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		            }
 		            
 	            GL11.glPopMatrix();
@@ -104,14 +104,14 @@ public class Render_Weapon implements IItemRenderer
 		            //System.out.println("[RENDER] tempIncrement is " + tempIncrement);
 		           
 		           // Main.models[weaponID].render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-		            if (stack.getItemDamage() >= stack.getMaxDamage() && Main.models[weaponID] instanceof EnderNymous_Model)
+		            if (stack.getItemDamage() >= stack.getMaxDamage() && Main.models.get(weaponID) instanceof EnderNymous_Model)
 		            {
-		            	EnderNymous_Model nym = (EnderNymous_Model) Main.models[weaponID];
+		            	EnderNymous_Model nym = (EnderNymous_Model) Main.models.get(weaponID);
 		            	nym.renderEmpty((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);	// Trying something out here
 		            }
 		            else
 		            {
-		            	Main.models[weaponID].render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+		            	Main.models.get(weaponID).render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		            }
 	            GL11.glPopMatrix();
 	        break;
@@ -131,14 +131,14 @@ public class Render_Weapon implements IItemRenderer
 		            //GL11.glTranslatef(-0.2F, 1F, 0F);
 		           
 		            //Main.models[weaponID].render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-		            if (stack.getItemDamage() >= stack.getMaxDamage() && Main.models[weaponID] instanceof EnderNymous_Model)
+		            if (stack.getItemDamage() >= stack.getMaxDamage() && Main.models.get(weaponID) instanceof EnderNymous_Model)
 		            {
-		            	EnderNymous_Model nym = (EnderNymous_Model) Main.models[weaponID];
+		            	EnderNymous_Model nym = (EnderNymous_Model) Main.models.get(weaponID);
 		            	nym.renderEmpty((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);	// Trying something out here
 		            }
 		            else
 		            {
-		            	Main.models[weaponID].render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+		            	Main.models.get(weaponID).render((Entity) data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
 		            }
 	            GL11.glPopMatrix();
 	        break;
